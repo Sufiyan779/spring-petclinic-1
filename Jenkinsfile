@@ -11,7 +11,7 @@ pipeline
          {
             steps 
             {
-               git url: 'https://github.com/Sufiyan779/spring-petclinic.git',
+               git url: 'https://github.com/Sufiyan779/spring-petclinic-1.git',
                     branch: "${params.BRANCH_TO_BUILD}"
 
             }
