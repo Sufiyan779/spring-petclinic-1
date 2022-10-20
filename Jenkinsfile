@@ -1,34 +1,33 @@
-pipeline 
-{
-    agent {label 'OPENJDK-11-3'}
-     parameters 
-     {
-        choice(name: 'BRACH_TO_BUILD', choices: ['main', 'task'], description: 'Choose the branch')
-     }
+pipeline {
+    agent {label 'OPENJDK-11-3' }
+	parameters {
+	choice(name: 'BRANCH', choices: [ 'task''main'], description: 'select branch to build')
+	string(name: 'GOAL', defaultValue: 'package', description: 'our Goal')
+	}
+	triggers{
+	      pollSCM('* * * * *')
+	}
 	
     stages {
-        stage ('source code  from git remote repository')
-         {
-            steps 
-            {
-               git url: 'https://github.com/Sufiyan779/spring-petclinic-1.git',
-                    branch: "${params.BRANCH_TO_BUILD}"
-
+        stage ('source code  from git remote repository') {
+            steps {
+                git url: 'https://github.com/subrAt5238/spring-petclinic.git',
+                branch: "${params.BRANCH}"
             }
         }
-        stage('To build maven package') 
-        {
-            steps 
-            {
-                sh 'mvn package'
-            }        
+        stage('To build maven package') {
+            steps {
+                sh "mvn ${params.GOAL}"
+            }
         }
-        stage('archive results') 
-        {
-            steps 
-            {
+		stage("archive artifact") {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar'
+            }
+			steps {
                 junit '**/surefire-reports/*.xml'
             }
         }
+				
     }
 }
