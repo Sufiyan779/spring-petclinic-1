@@ -1,6 +1,6 @@
 pipeline 
 {
-    agent {label 'OPENJDK-11-2'}
+    agent {label 'OPENJDK-11-3'}
      parameters 
      {
         choice(name: 'BRACH_TO_BUILD', choices: ['main', 'task'], description: 'Choose the branch')
