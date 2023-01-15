@@ -10,11 +10,12 @@ pool:
   vmImage: Server
 
 steps:
-  - task: Maven@3
-    inputs:
-      mavenPomFile: 'pom.xml'
-      goals: 'package'
-      publishJUnitResults: yes
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      jdkVersionOption: '1.11'
+  - script: 
+      echo "Hello!"
+      echo "world!"
+
+      
+- task: BatchScript@1
+  inputs:
+    filename: 'echo "Hello world"'
 
