@@ -4,10 +4,10 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- task
 
 pool:
-  vmImage: Server
+  vmImage: sufiyan
 
 steps:
   - script: 
